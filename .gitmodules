@@ -1,0 +1,3 @@
+[submodule "dwm"]
+	path = dwm
+	url = git@github.com:mrti259/dwm.git
