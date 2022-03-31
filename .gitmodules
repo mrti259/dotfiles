@@ -1,0 +1,3 @@
+[submodule "slstatus"]
+	path = slstatus
+	url = git@github.com:mrti259/slstatus.git
