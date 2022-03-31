@@ -7,3 +7,6 @@
 [submodule "slstatus"]
 	path = slstatus
 	url = git@github.com:mrti259/slstatus.git
+[submodule "libxft"]
+	path = libxft
+	url = https://gitlab.freedesktop.org/xorg/lib/libxft.git
