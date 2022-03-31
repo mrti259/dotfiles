@@ -10,3 +10,6 @@
 [submodule "libxft"]
 	path = libxft
 	url = https://gitlab.freedesktop.org/xorg/lib/libxft.git
+[submodule "st"]
+	path = st
+	url = git@github.com:mrti259/st.git
