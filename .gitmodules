@@ -1,0 +1,3 @@
+[submodule "libxft"]
+	path = libxft
+	url = https://gitlab.freedesktop.org/xorg/lib/libxft.git
