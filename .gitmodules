@@ -1,0 +1,3 @@
+[submodule "redshift"]
+	path = redshift
+	url = https://gist.github.com/5311c1828cf27d4b5732589546e62419.git
