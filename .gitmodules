@@ -1,15 +1,15 @@
 [submodule "redshift"]
-	path = redshift
+	path = config/redshift
 	url = https://gist.github.com/5311c1828cf27d4b5732589546e62419.git
 [submodule "dwm"]
-	path = dwm
+	path = sources/dwm
 	url = git@github.com:mrti259/dwm.git
 [submodule "slstatus"]
-	path = slstatus
+	path = sources/slstatus
 	url = git@github.com:mrti259/slstatus.git
 [submodule "libxft"]
-	path = libxft
+	path = sources/libxft
 	url = https://gitlab.freedesktop.org/xorg/lib/libxft.git
 [submodule "st"]
-	path = st
+	path = sources/st
 	url = git@github.com:mrti259/st.git
