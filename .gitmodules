@@ -13,3 +13,6 @@
 [submodule "st"]
 	path = sources/st
 	url = git@github.com:mrti259/st.git
+[submodule "sources/fish-shell"]
+	path = sources/fish-shell
+	url = git@github.com:fish-shell/fish-shell.git
