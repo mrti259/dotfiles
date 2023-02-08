@@ -15,9 +15,12 @@ dunst &
 # Volume icon
 volumeicon &
 
+#Network manager
+nm-applet --no-agent &
+
 # Apps
 syncthing --no-browser &
 telegram-desktop -startintray &
 discord --start-minimized &
-slack -u &
+#slack -u &
 $HOME/.dropbox-dist/dropboxd start &
