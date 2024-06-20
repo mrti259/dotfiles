@@ -14,9 +14,12 @@
   nixpkgs.config.allowUnfree = true;
 
   # Bootloader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    supportedFilesystems = [ "ntfs" ];
   };
 
   networking = {
@@ -82,14 +85,17 @@
       telegram-desktop
       vscode
     ];
+    shell = pkgs.fish;
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
-    firefox
     libreoffice
+    fishPlugins.sponge
+    fishPlugins.pure
+    gnomeExtensions.appindicator
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -100,6 +106,9 @@
   #   enableSSHSupport = true;
   # };
   programs = {
+    fish.enable = true;
+    command-not-found.enable = false;
+    direnv.enable = true;
     git = {
       enable = true;
       prompt.enable = true;
@@ -109,6 +118,10 @@
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
+    };
+    firefox = {
+      enable = true;
+      languagePacks = ["es-AR"];
     };
   };
 
@@ -125,21 +138,25 @@
       enable = true;
 
       # Configure keymap in X11
-      layout = "latam";
-      xkbVariant = "";
+      xkb = {
+        layout = "latam";
+        variant = "";
+      };
 
       # Enable touchpad support (enabled default in most desktopManager).
       #libinput.enable = true;
 
-      # Enable automatic login for the user.
-      displayManager.autoLogin = {
-        enable = true;
-        user = "borjag";
-      };
-
       # Enable the GNOME Desktop Environment.
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
+    };
+
+    udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+
+    # Enable automatic login for the user.
+    displayManager.autoLogin = {
+      enable = true;
+      user = "borjag";
     };
 
     syncthing.enable = true;
@@ -170,7 +187,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 
   # nix.gc = {
   #   automatic = true;
