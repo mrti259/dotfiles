@@ -11,10 +11,14 @@
     ];
 
   nix = {
-    settings.trusted-users = [ "root" "borjag" ];
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    gc = {
+      automatic = true;
+      dates = "montly";
+    };
+    settings.trusted-users = [ "root" "borjag" ];
   };
   nixpkgs.config.allowUnfree = true;
 
@@ -57,19 +61,15 @@
     pulse.enable = true;
   };
 
-  users.users.borjag = {
-    isNormalUser = true;
-    description = "Borja Garibotti";
-    extraGroups = [ "networkmanager" "wheel" ];
+  hardware.sensor.iio.enable = true;
+
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
   };
-
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  # systemd.services."getty@tty1".enable = false;
-  # systemd.services."autovt@tty1".enable = false;
-
-  environment.systemPackages = with pkgs; [
-    home-manager
-  ];
 
   services = {
     printing.enable = true;
@@ -82,23 +82,19 @@
       desktopManager.gnome.enable = true;
       displayManager.gdm.enable = true;
     };
-    displayManager.autoLogin = {
-      # enable = true;
-      # user = "borjag";
-    };
     thermald.enable = true;
     flatpak.enable = true;
   };
 
-  virtualisation.docker = {
-    enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
-  };
+  environment.systemPackages = with pkgs; [
+    home-manager
+  ];
 
-  hardware.sensor.iio.enable = true;
+  users.users.borjag = {
+    isNormalUser = true;
+    description = "Borja Garibotti";
+    extraGroups = [ "networkmanager" "wheel" ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

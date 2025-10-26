@@ -27,6 +27,7 @@ in {
     direnv.enable = true;
     fish.enable = true;
     rclone.enable = true;
+    nix-index-database.comma.enable = true;
     git = {
       enable = true;
       settings.user = {
