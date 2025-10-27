@@ -14,6 +14,8 @@ in {
       vscode
       gh
       devenv
+      fishPlugins.sponge
+      fishPlugins.pure
     ];
     file = {
       ".config/nixpkgs".source = dotfiles/nixpkgs;
