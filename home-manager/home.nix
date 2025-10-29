@@ -3,19 +3,28 @@
   homeDirectory = "/home/${username}";
 in {
   home = {
-    inherit username;
-    inherit homeDirectory;
+    inherit username homeDirectory;
     stateVersion = "24.11";
     packages = with pkgs; [
+      # term
       gnumake
+      fishPlugins.sponge
+      fishPlugins.pure
+
+      # office
       libreoffice
       obs-studio
       obsidian
+
+      # develop
       vscode
       gh
       devenv
-      fishPlugins.sponge
-      fishPlugins.pure
+
+      # comunication
+      discord
+      slack
+      telegram-desktop
     ];
     file = {
       ".config/nixpkgs".source = dotfiles/nixpkgs;
