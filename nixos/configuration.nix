@@ -16,7 +16,7 @@
     '';
     gc = {
       automatic = true;
-      dates = "montly";
+      dates = "monthly";
     };
     settings.trusted-users = [ "root" "borjag" ];
   };
@@ -84,6 +84,7 @@
     };
     thermald.enable = true;
     flatpak.enable = true;
+    gnome.games.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
