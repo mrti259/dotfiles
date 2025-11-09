@@ -27,6 +27,23 @@
     efi.canTouchEfiVariables = true;
   };
 
+  swapDevices = [
+    { device = "/var/lib/swapfile"; size = 16 * 1024; }
+  ];
+  boot.resumeDevice = "/dev/disk/by-uuid/9208c880-578a-49e4-96a7-444d63683811";
+  boot.kernelParams = [
+    "resume=/dev/disk/by-uuid/9208c880-578a-49e4-96a7-444d63683811"
+    "resume_offset=233472"
+    "mem_sleep_default=deep"
+  ];
+  powerManagement.enable = true;
+  services.power-profiles-daemon.enable = true;
+  services.logind.lidSwitch = "suspend-then-hibernate";
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=30m
+    SuspendState=mem
+  '';
+
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
