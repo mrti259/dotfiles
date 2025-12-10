@@ -27,21 +27,21 @@
     efi.canTouchEfiVariables = true;
   };
 
+  # hibernation
   swapDevices = [
     { device = "/var/lib/swapfile"; size = 16 * 1024; }
   ];
   boot.resumeDevice = "/dev/disk/by-uuid/9208c880-578a-49e4-96a7-444d63683811";
-  boot.kernelParams = [
-    "resume=/dev/disk/by-uuid/9208c880-578a-49e4-96a7-444d63683811"
-    "resume_offset=233472"
-    "mem_sleep_default=deep"
-  ];
+  boot.kernelParams = [ "resume_offset=233472" ];
   powerManagement.enable = true;
   services.power-profiles-daemon.enable = true;
-  services.logind.lidSwitch = "suspend-then-hibernate";
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend-then-hibernate";
+    HandleLidSwitchDocked = "suspend-then-hibernate";
+    HandlePowerKey = "suspend-then-hibernate";
+  };
   systemd.sleep.extraConfig = ''
     HibernateDelaySec=30m
-    SuspendState=mem
   '';
 
   networking = {
@@ -96,11 +96,11 @@
         layout = "latam";
         variant = "";
       };
-      desktopManager.gnome.enable = true;
-      displayManager.gdm.enable = true;
     };
     thermald.enable = true;
     flatpak.enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
     gnome.games.enable = true;
   };
 
