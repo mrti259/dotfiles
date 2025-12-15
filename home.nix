@@ -57,7 +57,6 @@ in {
       extensions = with pkgs.gnomeExtensions; [
         { package = appindicator; }
         { package = pip-on-top; }
-        { package = picture-of-the-day; }
         { package = power-off-options; }
       ];
     };
