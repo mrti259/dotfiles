@@ -22,8 +22,6 @@ in {
       devenv
 
       # comunication
-      discord
-      slack
       telegram-desktop
     ];
     file = {
