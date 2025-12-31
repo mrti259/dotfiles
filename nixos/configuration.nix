@@ -8,6 +8,7 @@
   imports =
     [
       /etc/nixos/hardware-configuration.nix
+      ./overlays.nix
     ];
 
   nix = {
