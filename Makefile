@@ -4,7 +4,7 @@ home:
 	home-manager switch --flake .
 
 nixos:
-	sudo nixos-rebuild switch
+	sudo nixos-rebuild switch --flake .
 
 clean:
 	nix-collect-garbage -d
@@ -13,6 +13,3 @@ clean:
 
 update:
 	nix flake update
-
-init:
-	sudo ln -sr ./nixos/configuration.nix /etc/nixos

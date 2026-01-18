@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of borjag";
+  description = "Home Manager + NixOS configuration of borjag";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -17,7 +17,7 @@
     nixpkgs,
     home-manager,
     nix-index-database,
-    ... }:
+    ... } @ inputs :
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -32,7 +32,13 @@
         inherit pkgs;
         modules = [
           nix-index-database.homeModules.nix-index
-          ./home.nix
+          ./home-manager/home.nix
+        ];
+      };
+      nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./nixos/configuration.nix
         ];
       };
     };

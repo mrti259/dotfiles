@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: let
+{ config, pkgs, ... }:
+let
   username = "borjag";
   homeDirectory = "/home/${username}";
 in {
@@ -15,6 +16,7 @@ in {
       libreoffice
       obs-studio
       obsidian
+      maestral
 
       # develop
       vscode

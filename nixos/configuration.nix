@@ -2,48 +2,31 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
-  imports =
-    [
-      /etc/nixos/hardware-configuration.nix
-      ./overlays.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./laptop.nix
+    ./hibernation.nix
+    ./overlays.nix
+  ];
 
   nix = {
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
+    settings = {
+      experimental-features = "nix-command flakes";
+      trusted-users = [ "root" "borjag" ];
+    };
     gc = {
       automatic = true;
       dates = "monthly";
     };
-    settings.trusted-users = [ "root" "borjag" ];
   };
-  nixpkgs.config.allowUnfree = true;
 
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-
-  # hibernation
-  swapDevices = [
-    { device = "/var/lib/swapfile"; size = 16 * 1024; }
-  ];
-  boot.resumeDevice = "/dev/disk/by-uuid/9208c880-578a-49e4-96a7-444d63683811";
-  boot.kernelParams = [ "resume_offset=233472" ];
-  powerManagement.enable = true;
-  services.power-profiles-daemon.enable = true;
-  services.logind.settings.Login = {
-    HandleLidSwitch = "suspend-then-hibernate";
-    HandleLidSwitchDocked = "suspend-then-hibernate";
-    HandlePowerKey = "suspend-then-hibernate";
-  };
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=30m
-  '';
 
   networking = {
     hostName = "nixos";
@@ -79,8 +62,6 @@
     pulse.enable = true;
   };
 
-  hardware.sensor.iio.enable = true;
-
   virtualisation.docker = {
     enable = true;
     rootless = {
@@ -98,7 +79,6 @@
         variant = "";
       };
     };
-    thermald.enable = true;
     flatpak.enable = true;
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
@@ -106,7 +86,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    home-manager
   ];
 
   users.users.borjag = {
