@@ -35,7 +35,10 @@
 
   networking = {
     hostName = "nixos";
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      plugins = [ pkgs.networkmanager-openvpn ];
+    };
   };
 
   time.timeZone = "America/Argentina/Buenos_Aires";
