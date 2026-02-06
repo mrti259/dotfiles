@@ -10,6 +10,7 @@
     ./laptop.nix
     ./hibernation.nix
     ./overlays.nix
+    ./podman.nix
   ];
 
   nix = {
@@ -68,14 +69,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-  };
-
-  virtualisation.docker = {
-    enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
   };
 
   services = {
