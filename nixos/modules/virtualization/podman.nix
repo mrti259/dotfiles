@@ -1,4 +1,5 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
+
 {
   virtualisation = {
     podman = {
@@ -13,6 +14,7 @@
     };
     containers.enable = true;
   };
+
   environment.systemPackages = with pkgs; [
     podman-compose
     podman-tui

@@ -1,7 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ ... }:
+
 {
-   nixpkgs = {
-     overlays = [
+  nixpkgs = {
+    overlays = [
       (final: prev: {
         gnome = prev.gnome.overrideScope (gfinal: gprev: {
           gvfs = gprev.gvfs.override {
@@ -11,6 +12,7 @@
         });
       })
     ];
+
     config.permittedInsecurePackages = [
       "libsoup-2.74.3"
     ];

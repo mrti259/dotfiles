@@ -7,93 +7,19 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./laptop.nix
-    ./hibernation.nix
-    ./overlays.nix
-    ./podman.nix
+    ./modules/core/boot.nix
+    ./modules/core/nix.nix
+    ./modules/core/locale.nix
+    ./modules/core/networking.nix
+    ./modules/core/overlays.nix
+    ./modules/hardware/laptop.nix
+    ./modules/hardware/power-management.nix
+    ./modules/desktop/audio.nix
+    ./modules/desktop/services.nix
+    ./modules/desktop/gnome.nix
+    ./modules/virtualization/podman.nix
+    ./modules/users/users.nix
   ];
-
-  nix = {
-    settings = {
-      experimental-features = "nix-command flakes";
-      trusted-users = [ "root" "borjag" ];
-    };
-    gc = {
-      automatic = true;
-      dates = "monthly";
-    };
-  };
-
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    grub = {
-      enable = true;
-      devices = [ "nodev" ];
-      efiSupport = true;
-      useOSProber = true;
-    };
-  };
-
-  networking = {
-    hostName = "nixos";
-    networkmanager = {
-      enable = true;
-      plugins = [ pkgs.networkmanager-openvpn ];
-    };
-  };
-
-  time.timeZone = "America/Argentina/Buenos_Aires";
-
-  i18n = {
-    defaultLocale = "es_AR.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "es_AR.UTF-8";
-      LC_IDENTIFICATION = "es_AR.UTF-8";
-      LC_MEASUREMENT = "es_AR.UTF-8";
-      LC_MONETARY = "es_AR.UTF-8";
-      LC_NAME = "es_AR.UTF-8";
-      LC_NUMERIC = "es_AR.UTF-8";
-      LC_PAPER = "es_AR.UTF-8";
-      LC_TELEPHONE = "es_AR.UTF-8";
-      LC_TIME = "es_AR.UTF-8";
-    };
-  };
-
-  console.keyMap = "la-latin1";
-
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  services = {
-    printing.enable = true;
-    xserver = {
-      enable = true;
-      xkb = {
-        layout = "latam";
-        variant = "";
-      };
-    };
-    flatpak.enable = true;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-    gnome.games.enable = true;
-  };
-
-  environment.systemPackages = with pkgs; [
-  ];
-
-  users.users.borjag = {
-    isNormalUser = true;
-    description = "Borja Garibotti";
-    extraGroups = [ "networkmanager" "wheel" ];
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

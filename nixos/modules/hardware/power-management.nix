@@ -1,4 +1,5 @@
 { ... }:
+
 let
   swapFilePath = "/var/lib/swapfile";
   swapFileSize = 16 * 1024; # Size in MiB
@@ -9,15 +10,19 @@ in
   swapDevices = [
     { device = swapFilePath; size = swapFileSize; }
   ];
+
   boot.resumeDevice = swapFileDevice;
   boot.kernelParams = [ "resume_offset=${swapFileOffset}" ];
+
   powerManagement.enable = true;
   services.power-profiles-daemon.enable = true;
+
   services.logind.settings.Login = {
     HandleLidSwitch = "suspend-then-hibernate";
     HandleLidSwitchDocked = "suspend-then-hibernate";
     HandlePowerKey = "suspend-then-hibernate";
   };
+
   systemd.sleep.extraConfig = ''
     HibernateDelaySec=30m
   '';
