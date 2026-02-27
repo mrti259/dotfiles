@@ -17,7 +17,8 @@
     ./modules/desktop/audio.nix
     ./modules/desktop/services.nix
     ./modules/desktop/gnome.nix
-    ./modules/virtualization/podman.nix
+    ./modules/virtualisation/docker.nix
+    # ./modules/virtualisation/podman.nix
     ./modules/users/users.nix
   ];
 

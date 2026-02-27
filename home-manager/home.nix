@@ -17,6 +17,7 @@ in {
       obs-studio
       obsidian
       maestral
+      xournalpp
 
       # develop
       vscode
@@ -51,6 +52,11 @@ in {
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
+    };
+    tmux = {
+      enable = true;
+      mouse = true;
+      disableConfirmationPrompt = true;
     };
     gnome-shell = {
       enable = true;
