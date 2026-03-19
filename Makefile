@@ -3,8 +3,14 @@
 home:
 	home-manager switch --flake .
 
+home-rollback:
+	home-manager switch --rollback
+
 nixos:
 	sudo nixos-rebuild switch --flake .
+
+nixos-rollback:
+	sudo nixos-rebuild switch --rollback
 
 clean:
 	nix-collect-garbage -d

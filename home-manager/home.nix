@@ -18,6 +18,7 @@ in {
       obsidian
       maestral
       xournalpp
+      krita
 
       # develop
       vscode
@@ -26,6 +27,12 @@ in {
 
       # comunication
       telegram-desktop
+
+      #games
+      pokemmo-installer
+
+      #desktop
+      fedora-backgrounds.f34
     ];
     file = {
       ".config/nixpkgs".source = dotfiles/nixpkgs;

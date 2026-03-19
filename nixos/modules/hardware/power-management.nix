@@ -21,6 +21,8 @@ in
     HandleLidSwitch = "suspend-then-hibernate";
     HandleLidSwitchDocked = "suspend-then-hibernate";
     HandlePowerKey = "suspend-then-hibernate";
+    IdleAction = "suspend-then-hibernate";
+    IdleActionSec = "2m";
   };
 
   systemd.sleep.extraConfig = ''
