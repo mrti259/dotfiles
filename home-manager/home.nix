@@ -33,6 +33,7 @@ in {
 
       #desktop
       fedora-backgrounds.f34
+      pop-launcher
     ];
     file = {
       ".config/nixpkgs".source = dotfiles/nixpkgs;
@@ -71,6 +72,7 @@ in {
         { package = appindicator; }
         { package = pip-on-top; }
         { package = power-off-options; }
+        { package = pop-shell; }
       ];
     };
   };
