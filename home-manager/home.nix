@@ -18,7 +18,6 @@ in {
       obsidian
       maestral
       xournalpp
-      krita
 
       # develop
       vscode
@@ -28,16 +27,12 @@ in {
       # comunication
       telegram-desktop
 
-      #games
-      pokemmo-installer
-
-      #desktop
+      # desktop
       fedora-backgrounds.f34
-      pop-launcher
     ];
     file = {
       ".config/nixpkgs".source = dotfiles/nixpkgs;
-      ".config/nvim".source = dotfiles/nvim;
+      ".config/nvim/init.vim".source = dotfiles/nvim/init.vim;
     };
     sessionVariables = {
     };
@@ -72,7 +67,7 @@ in {
         { package = appindicator; }
         { package = pip-on-top; }
         { package = power-off-options; }
-        { package = pop-shell; }
+        { package = tiling-shell; }
       ];
     };
   };

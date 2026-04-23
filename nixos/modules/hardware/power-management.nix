@@ -1,10 +1,10 @@
-{ ... }:
+{ config, ... }:
 
 let
   swapFilePath = "/var/lib/swapfile";
   swapFileSize = 16 * 1024; # Size in MiB
-  swapFileDevice = "/dev/disk/by-uuid/9208c880-578a-49e4-96a7-444d63683811";
-  swapFileOffset = "233472"; # Offset in KiB
+  swapFileDevice = config.fileSystems."/".device;
+  swapFileOffset = "17170432"; # Offset in KiB
 in
 {
   swapDevices = [
@@ -25,7 +25,7 @@ in
     IdleActionSec = "2m";
   };
 
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=30m
-  '';
+  systemd.sleep.settings.Sleep = {
+    HibernateDelaySec = "30m";
+  };
 }
