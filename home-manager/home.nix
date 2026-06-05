@@ -70,6 +70,7 @@ in {
         { package = tiling-shell; }
       ];
     };
+    opencode.enable = true;
   };
   services = {
     syncthing.enable = true;
