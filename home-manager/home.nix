@@ -11,18 +11,15 @@ in {
       gnumake
       fishPlugins.sponge
       fishPlugins.pure
+      devenv
+      gh
 
       # office
       libreoffice
-      obs-studio
+      # obs-studio
       obsidian
       maestral
       xournalpp
-
-      # develop
-      vscode
-      gh
-      devenv
 
       # comunication
       telegram-desktop
@@ -32,9 +29,11 @@ in {
     ];
     file = {
       ".config/nixpkgs".source = dotfiles/nixpkgs;
-      ".config/nvim/init.vim".source = dotfiles/nvim/init.vim;
     };
     sessionVariables = {
+    };
+    shellAliases = {
+      code = "codium";
     };
   };
   programs = {
@@ -55,6 +54,9 @@ in {
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
+      withRuby = false;
+      withPython3 = false;
+      extraConfig = builtins.readFile ./dotfiles/nvim/init.vim;
     };
     tmux = {
       enable = true;
@@ -71,6 +73,7 @@ in {
       ];
     };
     opencode.enable = true;
+    vscodium.enable = true;
   };
   services = {
     syncthing.enable = true;
