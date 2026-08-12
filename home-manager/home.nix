@@ -28,7 +28,7 @@ in {
       fedora-backgrounds.f34
     ];
     file = {
-      ".config/nixpkgs".source = dotfiles/nixpkgs;
+      ".config/nixpkgs".source = ../nix/nixpkgs;
     };
     sessionVariables = {
     };
@@ -37,7 +37,6 @@ in {
     };
   };
   programs = {
-    home-manager.enable = true;
     direnv.enable = true;
     fish.enable = true;
     rclone.enable = true;

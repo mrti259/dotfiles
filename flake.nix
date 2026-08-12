@@ -20,25 +20,38 @@
     ... } @ inputs :
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-      };
+      nixpkgsConfig = import ./nix/nixpkgs/config.nix;
     in
     {
       homeConfigurations."borjag" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+        pkgs = import nixpkgs {
+          inherit system;
+          config = nixpkgsConfig;
+        };
         modules = [
           nix-index-database.homeModules.nix-index
           ./home-manager/home.nix
         ];
       };
       nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
+        inherit system;
         specialArgs = { inherit inputs; };
         modules = [
+          home-manager.nixosModules.home-manager
           ./nixos/configuration.nix
+          {
+            nixpkgs.config = nixpkgsConfig;
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.borjag = {
+                imports = [
+                  nix-index-database.homeModules.nix-index
+                  ./home-manager/home.nix
+                ];
+              };
+            };
+          }
         ];
       };
     };

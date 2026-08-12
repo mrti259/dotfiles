@@ -1,10 +1,10 @@
-.PHONY: home nixos clean update init
+.PHONY: home home-rollback nixos nixos-rollback clean update check
 
 home:
-	home-manager switch --flake .
+	nix run .#homeConfigurations.borjag.activationPackage
 
 home-rollback:
-	home-manager switch --rollback --flake .
+	nix profile rollback --profile ~/.local/state/nix/profiles/home-manager
 
 nixos:
 	sudo nixos-rebuild switch --flake .
@@ -19,3 +19,6 @@ clean:
 
 update:
 	nix flake update
+
+check:
+	nix flake check

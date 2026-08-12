@@ -18,7 +18,7 @@
     ./modules/desktop/services.nix
     ./modules/desktop/gnome.nix
     ./modules/virtualisation/docker.nix
-    ./modules/virtualisation/virtualbox.nix
+    #./modules/virtualisation/virtualbox.nix
     ./modules/users/users.nix
   ];
 

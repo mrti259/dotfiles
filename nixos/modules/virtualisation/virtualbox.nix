@@ -1,12 +1,12 @@
 { ... }:
 
 {
-  # Habilitar VirtualBox en el host
-  virtualisation.virtualbox.host.enable = true;
-
+  virtualisation.virtualbox = {
+    # Habilitar VirtualBox en el host
+    host.enable = true;
+    # Opcional: habilitar Guest Additions si quieres carpetas compartidas y clipboard
+    guest.enable = true;
+  };
   # Agregar tu usuario al grupo vboxusers
   users.extraGroups.vboxusers.members = [ "borjag" ];
-
-  # Opcional: habilitar Guest Additions si quieres carpetas compartidas y clipboard
-  virtualisation.virtualbox.guest.enable = true;
 }
