@@ -3,9 +3,10 @@
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    ../common/nix.nix
+    ../common/nixpkgs.nix
     ./hardware-configuration.nix
     ./modules/core/boot.nix
-    ./modules/core/nix.nix
     ./modules/core/locale.nix
     ./modules/core/networking.nix
     ./modules/hardware/laptop.nix
@@ -24,12 +25,16 @@
     users.borjag = {
       imports = [
         inputs.nix-index-database.homeModules.nix-index
-        ../../home-manager/borjag/home.nix
+        ../../home-manager/borjag
       ];
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nix = {
+    settings = {
+      trusted-users = [ "root" "borjag" ];
+    };
+  };
 
   system.stateVersion = "25.05";
 }

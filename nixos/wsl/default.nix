@@ -2,19 +2,21 @@
 
 {
   imports = [
+    inputs.home-manager.nixosModules.home-manager
     inputs.nixos-wsl.nixosModules.default
+    ../common/nix.nix
+    ../common/nixpkgs.nix
   ];
 
-  nix = {
-    settings = {
-      experimental-features = "nix-command flakes";
-      flake-registry = "";
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.nixos = {
+      imports = [
+        inputs.nix-index-database.homeModules.nix-index
+        ../../home-manager/nixos
+      ];
     };
-    channel.enable = false;
-  };
-
-  nixpkgs = {
-    config.allowUnfree = true;
   };
 
   wsl = {

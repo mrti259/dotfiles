@@ -3,17 +3,15 @@ let
   username = "borjag";
   homeDirectory = "/home/${username}";
 in {
+  imports = [
+    ../common
+  ];
+
   home = {
     inherit username homeDirectory;
     stateVersion = "24.11";
 
     packages = with pkgs; [
-      # term
-      gnumake
-      fishPlugins.sponge
-      fishPlugins.pure
-      gh
-
       # office
       libreoffice
       # obs-studio
@@ -28,9 +26,7 @@ in {
       fedora-backgrounds.f34
     ];
     file = {
-      ".config/nixpkgs".source = ./dotfiles/nixpkgs;
-    };
-    sessionVariables = {
+      ".config/nixpkgs".source = ../common/dotfiles/nixpkgs;
     };
     shellAliases = {
       code = "codium";
@@ -38,31 +34,8 @@ in {
   };
 
   programs = {
-    devenv.enable = true;
-    fish.enable = true;
-    rclone.enable = true;
     nix-index-database.comma.enable = true;
-    git = {
-      enable = true;
-      settings.user = {
-        name = "Borja Garibotti";
-        email = "mgaribotti@fi.uba.ar";
-      };
-    };
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
-      withRuby = false;
-      withPython3 = false;
-      extraConfig = builtins.readFile ./dotfiles/nvim/init.vim;
-    };
-    tmux = {
-      enable = true;
-      mouse = true;
-      disableConfirmationPrompt = true;
-    };
+    rclone.enable = true;
     gnome-shell = {
       enable = true;
       extensions = with pkgs.gnomeExtensions; [
@@ -72,7 +45,6 @@ in {
         { package = tiling-shell; }
       ];
     };
-    opencode.enable = true;
     vscodium.enable = true;
   };
 
