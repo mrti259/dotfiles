@@ -6,12 +6,12 @@ in {
   home = {
     inherit username homeDirectory;
     stateVersion = "24.11";
+
     packages = with pkgs; [
       # term
       gnumake
       fishPlugins.sponge
       fishPlugins.pure
-      devenv
       gh
 
       # office
@@ -28,7 +28,7 @@ in {
       fedora-backgrounds.f34
     ];
     file = {
-      ".config/nixpkgs".source = ../nix/nixpkgs;
+      ".config/nixpkgs".source = ./dotfiles/nixpkgs;
     };
     sessionVariables = {
     };
@@ -36,8 +36,9 @@ in {
       code = "codium";
     };
   };
+
   programs = {
-    direnv.enable = true;
+    devenv.enable = true;
     fish.enable = true;
     rclone.enable = true;
     nix-index-database.comma.enable = true;
@@ -74,6 +75,7 @@ in {
     opencode.enable = true;
     vscodium.enable = true;
   };
+
   services = {
     syncthing.enable = true;
   };

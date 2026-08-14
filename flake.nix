@@ -3,10 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,44 +17,30 @@
 
   outputs = {
     nixpkgs,
-    home-manager,
-    nix-index-database,
     ... } @ inputs :
     let
-      system = "x86_64-linux";
-      nixpkgsConfig = import ./nix/nixpkgs/config.nix;
+      systems = [
+        "aarch64-linux"
+        "i686-linux"
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+      forAllSystems = nixpkgs.lib.genAttrs systems;
     in
     {
-      homeConfigurations."borjag" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-          config = nixpkgsConfig;
+      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+
+      overlays = import ./overlays { inherit inputs; };
+      nixosModules = import ./modules/nixos;
+      homeManagerModules = import ./modules/home-manager;
+
+      nixosConfigurations = {
+        dell = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [ ./nixos/dell ];
         };
-        modules = [
-          nix-index-database.homeModules.nix-index
-          ./home-manager/home.nix
-        ];
-      };
-      nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs; };
-        modules = [
-          home-manager.nixosModules.home-manager
-          ./nixos/configuration.nix
-          {
-            nixpkgs.config = nixpkgsConfig;
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.borjag = {
-                imports = [
-                  nix-index-database.homeModules.nix-index
-                  ./home-manager/home.nix
-                ];
-              };
-            };
-          }
-        ];
       };
     };
 }
