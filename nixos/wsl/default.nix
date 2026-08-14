@@ -24,6 +24,8 @@
     defaultUser = "nixos";
   };
 
+  networking.hostName = "nixos-wsl";
+
   nixpkgs.hostPlatform = "x86_64-linux";
 
   system.stateVersion = "26.05";

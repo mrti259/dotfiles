@@ -1,5 +1,5 @@
 {
-  description = "Home Manager + NixOS configuration of borjag";
+  description = "Home Manager + NixOS configuration of borja";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -24,11 +24,11 @@
     in
     {
       nixosConfigurations = {
-        dell = nixpkgs.lib.nixosSystem {
+        nixos-dell = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [ ./nixos/dell ];
         };
-        wsl = nixpkgs.lib.nixosSystem {
+        nixos-wsl = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [ ./nixos/wsl ];
         };

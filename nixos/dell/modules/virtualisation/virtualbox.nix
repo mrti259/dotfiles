@@ -5,5 +5,5 @@
     host.enable = true;
     guest.enable = true;
   };
-  users.extraGroups.vboxusers.members = [ "borjag" ];
+  users.extraGroups.vboxusers.members = [ "borja" ];
 }

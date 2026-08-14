@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  username = "borjag";
+  username = "borja";
   homeDirectory = "/home/${username}";
 in {
   imports = [

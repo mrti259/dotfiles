@@ -4,13 +4,13 @@ nixos:
 	sudo nixos-rebuild switch --flake .
 
 nixos-%:
-	sudo nixos-rebuild switch --flake .#$*
+	sudo nixos-rebuild switch --flake .#nixos-$*
 
 nixos-rollback:
 	sudo nixos-rebuild switch --rollback --flake .
 
 nixos-rollback-%:
-	sudo nixos-rebuild switch --rollback --flake .#$*
+	sudo nixos-rebuild switch --rollback --flake .#nixos-$*
 
 clean:
 	nix-collect-garbage -d

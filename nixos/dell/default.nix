@@ -22,17 +22,17 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.borjag = {
+    users.borja = {
       imports = [
         inputs.nix-index-database.homeModules.nix-index
-        ../../home-manager/borjag
+        ../../home-manager/borja
       ];
     };
   };
 
   nix = {
     settings = {
-      trusted-users = [ "root" "borjag" ];
+      trusted-users = [ "root" "borja" ];
     };
   };
 
