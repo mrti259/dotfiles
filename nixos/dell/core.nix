@@ -1,6 +1,14 @@
-{ ... }:
-
 {
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    grub = {
+      enable = true;
+      devices = [ "nodev" ];
+      efiSupport = true;
+      useOSProber = true;
+    };
+  };
+
   time.timeZone = "America/Argentina/Buenos_Aires";
 
   i18n = {
@@ -19,4 +27,6 @@
   };
 
   console.keyMap = "la-latin1";
+
+  networking.networkmanager.enable = true;
 }

@@ -1,8 +1,9 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 let
   username = "borja";
   homeDirectory = "/home/${username}";
-in {
+in
+{
   imports = [
     ../common
   ];
@@ -12,17 +13,18 @@ in {
     stateVersion = "24.11";
 
     packages = with pkgs; [
-      # office
+      ## office
+      maestral
+      obsidian
+      xournalpp
+      krita
       libreoffice
       # obs-studio
-      obsidian
-      maestral
-      xournalpp
 
-      # comunication
+      ## comunication
       telegram-desktop
 
-      # desktop
+      ## desktop
       fedora-backgrounds.f34
     ];
     file = {
@@ -35,17 +37,18 @@ in {
 
   programs = {
     nix-index-database.comma.enable = true;
-    rclone.enable = true;
     gnome-shell = {
       enable = true;
       extensions = with pkgs.gnomeExtensions; [
         { package = appindicator; }
+        { package = picture-of-the-day; }
         { package = pip-on-top; }
         { package = power-off-options; }
         { package = tiling-shell; }
       ];
     };
     vscodium.enable = true;
+    rclone.enable = true;
   };
 
   services = {

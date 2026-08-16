@@ -2,22 +2,15 @@
 
 {
   imports = [
-    inputs.home-manager.nixosModules.home-manager
     inputs.nixos-wsl.nixosModules.default
+    ../common/home-manager.nix
     ../common/nix.nix
     ../common/nixpkgs.nix
   ];
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users.nixos = {
-      imports = [
-        inputs.nix-index-database.homeModules.nix-index
-        ../../home-manager/nixos
-      ];
-    };
-  };
+  home-manager.users.nixos.imports = [
+    ../../home-manager/nixos
+  ];
 
   wsl = {
     enable = true;

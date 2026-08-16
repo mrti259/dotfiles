@@ -1,6 +1,6 @@
 # Dotfiles
 
-Base de configuración de NixOS (flake) + Home Manager.
+Base de configuración de NixOS (flake).
 
 ## Uso
 
