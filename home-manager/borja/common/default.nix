@@ -6,11 +6,15 @@
     ./tmux.nix
   ];
 
-  home.packages = with pkgs; [
-    gnumake
-    fishPlugins.sponge
-    fishPlugins.pure
-  ];
+  home = {
+    username = "borja";
+    homeDirectory = "/home/borja";
+    packages = with pkgs; [
+      gnumake
+      fishPlugins.sponge
+      fishPlugins.pure
+    ];
+  };
 
   programs = {
     gh.enable = true;

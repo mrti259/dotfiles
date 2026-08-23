@@ -8,13 +8,13 @@
     ../common/nixpkgs.nix
   ];
 
-  home-manager.users.nixos.imports = [
-    ../../home-manager/nixos
+  home-manager.users.borja.imports = [
+    ../../home-manager/borja/wsl
   ];
 
   wsl = {
     enable = true;
-    defaultUser = "nixos";
+    defaultUser = "borja";
   };
 
   networking.hostName = "nixos-wsl";

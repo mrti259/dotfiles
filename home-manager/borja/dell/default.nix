@@ -1,15 +1,10 @@
 { pkgs, ... }:
-let
-  username = "borja";
-  homeDirectory = "/home/${username}";
-in
 {
   imports = [
     ../common
   ];
 
   home = {
-    inherit username homeDirectory;
     stateVersion = "24.11";
 
     packages = with pkgs; [

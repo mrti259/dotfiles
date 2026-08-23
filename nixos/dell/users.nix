@@ -8,7 +8,7 @@
 
   home-manager.users.borja.imports = [
     inputs.nix-index-database.homeModules.nix-index
-    ../../home-manager/borja
+    ../../home-manager/borja/dell
   ];
 
   nix.settings.trusted-users = [ "root" "borja" ];
