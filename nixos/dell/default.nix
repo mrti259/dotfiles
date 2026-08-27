@@ -3,17 +3,12 @@
 {
   imports = [
     ./hardware
+    ./system
+    ./services
 
     ../common/nix.nix
     ../common/nixpkgs.nix
     ../common/home-manager.nix
-
-    ./core.nix
-    ./users.nix
-    ./desktop.nix
-
-    ./virtualisation/docker.nix
-    #./virtualisation/virtualbox.nix
   ];
 
   networking.hostName = "nixos-dell";
