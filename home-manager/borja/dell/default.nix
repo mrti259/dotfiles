@@ -12,15 +12,12 @@
       maestral
       obsidian
       xournalpp
-      krita
-      libreoffice
+      # krita
+      # libreoffice
       # obs-studio
 
       ## comunication
       telegram-desktop
-
-      ## desktop
-      fedora-backgrounds.f34
     ];
     file = {
       ".config/nixpkgs".source = ../common/dotfiles/nixpkgs;
