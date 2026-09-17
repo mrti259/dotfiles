@@ -4,6 +4,7 @@
     inputs.nix-index-database.homeModules.nix-index
     inputs.zen-browser.homeModules.beta
     ../common
+    ./fish.nix
   ];
 
   home = {
