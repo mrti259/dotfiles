@@ -12,6 +12,9 @@ nixos-rollback:
 nixos-rollback-%:
 	sudo nixos-rebuild switch --rollback --flake .#nixos-$*
 
+list-generations:
+	nixos-rebuild list-generations
+
 clean:
 	nix-collect-garbage -d
 	sudo nix-collect-garbage -d
