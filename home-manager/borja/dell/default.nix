@@ -39,6 +39,10 @@
         { package = tiling-shell; }
       ];
     };
+    zen-browser = {
+      enable = true;
+      setAsDefaultBrowser = true;
+    };
     vscodium.enable = true;
     rclone.enable = true;
   };

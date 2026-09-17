@@ -8,6 +8,7 @@
 
   home-manager.users.borja.imports = [
     inputs.nix-index-database.homeModules.nix-index
+    inputs.zen-browser.homeModules.beta
     ../../../home-manager/borja/dell
   ];
 
