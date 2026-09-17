@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ./git.nix
@@ -17,6 +17,9 @@
   programs = {
     gh.enable = true;
     devenv.enable = true;
-    opencode.enable = true;
+    opencode = {
+      enable = true;
+      package = inputs.opencode.packages.${pkgs.system}.opencode;
+    };
   };
 }

@@ -2,6 +2,7 @@
   description = "Home Manager + NixOS configuration of borja";
 
   inputs = {
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
@@ -22,6 +23,10 @@
         home-manager.follows = "home-manager";
       };
     };
+    opencode = {
+      # v1.18.30 no funk
+      url = "github:anomalyco/opencode/v1.18.29";
+    };
   };
 
   outputs = {
@@ -33,11 +38,25 @@
       nixosConfigurations = {
         nixos-dell = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
-          modules = [ ./nixos/dell ];
+          modules = [
+            ./nixos/dell
+            {
+              home-manager.users.borja.imports = [
+                ./home-manager/borja/dell
+              ];
+            }
+          ];
         };
         nixos-wsl = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
-          modules = [ ./nixos/wsl ];
+          modules = [
+            ./nixos/wsl
+            {
+              home-manager.users.borja.imports = [
+                ./home-manager/borja/wsl
+              ];
+            }
+          ];
         };
       };
     };

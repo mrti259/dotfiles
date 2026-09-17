@@ -8,10 +8,6 @@
     ../common/nixpkgs.nix
   ];
 
-  home-manager.users.borja.imports = [
-    ../../home-manager/borja/wsl
-  ];
-
   wsl = {
     enable = true;
     defaultUser = "borja";

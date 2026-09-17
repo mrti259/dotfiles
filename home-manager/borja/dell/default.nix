@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
+    inputs.nix-index-database.homeModules.nix-index
+    inputs.zen-browser.homeModules.beta
     ../common
   ];
 
