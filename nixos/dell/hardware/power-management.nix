@@ -1,18 +1,10 @@
 { config, ... }:
 
 let
-  swapFilePath = "/var/lib/swapfile";
-  swapFileSize = 16 * 1024; # Size in MiB
-  swapFileDevice = config.fileSystems."/".device;
-  swapFileOffset = "17170432"; # Offset in KiB
+  swapFileDevice = "/dev/disk/by-uuid/b7080ebf-6379-4eb0-b758-63ae66399c94";
 in
 {
-  swapDevices = [
-    { device = swapFilePath; size = swapFileSize; }
-  ];
-
   boot.resumeDevice = swapFileDevice;
-  boot.kernelParams = [ "resume_offset=${swapFileOffset}" ];
 
   powerManagement.enable = true;
   services.power-profiles-daemon.enable = true;
