@@ -6,9 +6,11 @@
     ./system
     ./services
 
+    ../common/borja.nix
+    ../common/docker.nix
+    ../common/home-manager.nix
     ../common/nix.nix
     ../common/nixpkgs.nix
-    ../common/home-manager.nix
   ];
 
   networking.hostName = "nixos-dell";
