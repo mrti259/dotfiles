@@ -3,7 +3,7 @@
     enable = true;
     autoPrune = {
       enable = true;
-      dates = "monthly";
+      dates = "weekly";
     };
   };
 }

@@ -10,6 +10,9 @@
   home = {
     username = "borja";
     homeDirectory = "/home/borja";
+    file = {
+      ".config/nixpkgs".source = ./dotfiles/nixpkgs;
+    };
     packages = with pkgs; [
       gnumake
     ];
@@ -20,7 +23,7 @@
     devenv.enable = true;
     opencode = {
       enable = true;
-      package = inputs.opencode.packages.${pkgs.system}.opencode;
+      # package = inputs.opencode.packages.${pkgs.system}.opencode;
     };
   };
 }

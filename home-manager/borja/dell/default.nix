@@ -21,9 +21,6 @@
       ## comunication
       telegram-desktop
     ];
-    file = {
-      ".config/nixpkgs".source = ../common/dotfiles/nixpkgs;
-    };
     shellAliases = {
       code = "codium";
     };
