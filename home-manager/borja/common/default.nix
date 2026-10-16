@@ -10,6 +10,7 @@
   home = {
     username = "borja";
     homeDirectory = "/home/borja";
+    backupFileExtension = "backup";
     file = {
       ".config/nixpkgs".source = ./dotfiles/nixpkgs;
     };
@@ -21,9 +22,6 @@
   programs = {
     gh.enable = true;
     devenv.enable = true;
-    opencode = {
-      enable = true;
-      # package = inputs.opencode.packages.${pkgs.system}.opencode;
-    };
+    opencode.enable = true;
   };
 }

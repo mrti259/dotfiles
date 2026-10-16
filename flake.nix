@@ -2,7 +2,6 @@
   description = "Home Manager + NixOS configuration of borja";
 
   inputs = {
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
@@ -22,10 +21,6 @@
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
       };
-    };
-    opencode = {
-      # v1.18.30 no funk
-      url = "github:anomalyco/opencode/v1.18.29";
     };
   };
 
