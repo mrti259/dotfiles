@@ -13,7 +13,12 @@
     backupFileExtension = "backup";
     file = {
       ".config/nixpkgs".source = ./dotfiles/nixpkgs;
+      ".local/bin/git-prune-merged" = {
+        source = ./dotfiles/bin/git-prune-merged;
+        executable = true;
+      };
     };
+    sessionPath = [ "$HOME/.local/bin" ];
     packages = with pkgs; [
       gnumake
     ];

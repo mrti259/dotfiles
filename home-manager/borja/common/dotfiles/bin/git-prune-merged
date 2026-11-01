@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# git-prune-merged: delete local (and optionally remote) merged branches.
+# Usage: git prune-merged [--force] [--remote] [-h|--help]
+# Default is --dry-run. Installed via home.file, git exposes it as `git prune-merged`.
+force=0; remote=0
+for a in "$@"; do
+  case "$a" in
+    -f|--force) force=1 ;;
+    -r|--remote) remote=1 ;;
+    -h|--help)
+      echo "Usage: git prune-merged [--force] [--remote]"
+      echo "  default is --dry-run, use --force to delete"
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $a" >&2
+      exit 1
+      ;;
+  esac
+done
+git rev-parse --git-dir >/dev/null 2>&1 || { echo "Not a git repo" >&2; exit 1; }
+git fetch --prune
+if git show-ref --verify --quiet refs/heads/main; then base=main;
+elif git show-ref --verify --quiet refs/heads/master; then base=master;
+else base=$(git branch --show-current); fi
+current=$(git branch --show-current)
+protected="main|master|develop|dev|trunk|staging|production"
+locals=$(git branch --merged "$base" | sed "s/^[* ]*//;s/^ *//;s/ *$//" | grep -vE "^$" | grep -vE "^($protected)$" | grep -v -- "$current" || true)
+if [ -z "$locals" ]; then echo "No local merged branches to prune (base: $base).";
+elif [ "$force" -eq 0 ]; then echo "[dry-run] local, would delete (base: $base):"; echo "$locals";
+else echo "$locals" | xargs git branch -d; fi
+if [ "$remote" -eq 1 ]; then
+  remotes=$(git branch -r --merged "$base" | sed "s/^ *//" | grep "^origin/" | sed "s|^origin/||" | grep -vE "^HEAD" | grep -vE "^($protected)$" || true)
+  if [ -z "$remotes" ]; then echo "No remote merged branches to prune.";
+  elif [ "$force" -eq 0 ]; then echo "[dry-run] remote, would run for origin:"; echo "$remotes";
+  else echo "$remotes" | xargs -n1 git push -d origin; fi
+fi

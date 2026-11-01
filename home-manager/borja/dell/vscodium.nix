@@ -17,7 +17,6 @@
         "workbench.editor.pinnedTabsOnSeparateRow" = true;
         "workbench.sideBar.location" = "right";
         "editor.wordWrap" = "on";
-        "nix.enableLanguageServer" = true;
         "editor.formatOnSave" = true;
       };
     };

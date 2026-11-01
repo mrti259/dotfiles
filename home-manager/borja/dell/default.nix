@@ -7,6 +7,7 @@
 
     ./gnome-shell.nix
     ./vscodium.nix
+    ./zed-editor.nix
   ];
 
   home = {

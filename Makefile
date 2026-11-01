@@ -1,27 +1,9 @@
-.PHONY: nixos nixos-rollback clean update check
+.PHONY: help
 
-nixos:
-	sudo nixos-rebuild switch --flake .
+include mk/nixos.mk
+include mk/nix.mk
+include mk/docker.mk
+include mk/bootstrap.mk
 
-nixos-%:
-	sudo nixos-rebuild switch --flake .#nixos-$*
-
-nixos-rollback:
-	sudo nixos-rebuild switch --rollback --flake .
-
-nixos-rollback-%:
-	sudo nixos-rebuild switch --rollback --flake .#nixos-$*
-
-list-generations:
-	nixos-rebuild list-generations
-
-clean:
-	nix-collect-garbage -d
-	sudo nix-collect-garbage -d
-	sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations old
-
-update:
-	nix flake update
-
-check:
-	nix flake check
+help: ## Muestra esta ayuda
+	@grep -h -E '^[a-zA-Z_%-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
