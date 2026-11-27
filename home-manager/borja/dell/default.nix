@@ -6,7 +6,6 @@
     ../common
 
     ./gnome-shell.nix
-    ./vscodium.nix
     ./zed-editor.nix
   ];
 
@@ -17,8 +16,6 @@
       maestral
       obsidian
       xournalpp
-      # krita
-      # libreoffice
       # obs-studio
 
       ## comunication
@@ -32,11 +29,9 @@
       enable = true;
       setAsDefaultBrowser = true;
     };
-    rclone.enable = true;
   };
 
   services = {
     syncthing.enable = true;
   };
 }
-
